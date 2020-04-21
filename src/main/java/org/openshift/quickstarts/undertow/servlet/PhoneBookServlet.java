@@ -90,8 +90,7 @@ public class PhoneBookServlet extends HttpServlet {
             if(number == null) {
                 String select = "SELECT * FROM " + TABLE + " WHERE " + NAME +"='" + name + "'";
                 ResultSet result = stmt.executeQuery(select);
-                if(result != null) {
-                    result.next();
+                if(result.next()) {
                     number = result.getString(NUMBER);
                 } else {
                     number = "not found";
