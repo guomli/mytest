@@ -37,12 +37,15 @@ public class ServletServer {
 
     public static void main(final String[] args) {
         String driver = System.getenv("DB_DRIVER");
-        String host = System.getenv("OPENJDK_APP_" + driver.toUpperCase() + "_SERVICE_HOST");
-        String port = System.getenv("OPENJDK_APP_" + driver.toUpperCase() + "_SERVICE_PORT");
+//        String host = System.getenv("OPENJDK_APP_" + driver.toUpperCase() + "_SERVICE_HOST");
+//        String port = System.getenv("OPENJDK_APP_" + driver.toUpperCase() + "_SERVICE_PORT");
+        String host = System.getenv("DATABASE_SERVICE_NAME");
+        String port = System.getenv(host + "_SERVICE_PORT");
         String database = System.getenv("DB_DATABASE");
         String username = System.getenv("DB_USERNAME");
         String password = System.getenv("DB_PASSWORD");
-        String url = "jdbc:" + driver + "://" + host + ":" + port + "/" + database;
+//        String url = "jdbc:" + driver + "://" + host + ":" + port + "/" + database;
+        String url = "jdbc:" + driver + "://" + host + ":" + "3306" + "/" + database;
 
         try {
 
