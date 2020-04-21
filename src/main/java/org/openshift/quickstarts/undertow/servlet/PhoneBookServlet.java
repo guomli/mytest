@@ -83,15 +83,20 @@ public class PhoneBookServlet extends HttpServlet {
 
             String name = req.getParameter(NAME);
             if(name == null) {
-                throw new ServletException("Parameter " + NAME + " is required");
+//                throw new ServletException("Parameter " + NAME + " is required");
+                name = "NONE";
             }
             String number = req.getParameter(NUMBER);
             if(number == null) {
                 String select = "SELECT * FROM " + TABLE + " WHERE " + NAME +"='" + name + "'";
                 ResultSet result = stmt.executeQuery(select);
-                result.next();
-                number = result.getString(NUMBER);
-                writer.write("Number for " + name + " is " + number);
+                if(result) {
+                    result.next();
+                    number = result.getString(NUMBER);
+                } else {
+                    number = "not found";
+                }
+                writer.write("Number for user '" + name + "' is " + number);
             }
             else {
                 String insert = "INSERT INTO " + TABLE + " VALUES ('"+ name + "','" + number +"')";
